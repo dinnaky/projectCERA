@@ -25,9 +25,22 @@ $nome = $_POST["nome"];
 $cpf = $_POST["cpf"];
 $botao = $_POST["botao"];
 
+if(empty($botao)) {
 
-$sql = "INSERT INTO funcionarios (id, nome, cpf) 
-        VALUES ('', '$nome', '$cpf')";
+}else if ($botao == "cadastrar"){
+    $sql = "INSERT INTO funcionarios (id, nome, cpf) VALUES ('', '$nome', '$cpf')";
+}
+
+// aqui vou tratar erros das operações C.E.R.A
+
+if(!empty($sql)) {
+    if(mysqli_query($conexao, $sql)) {
+        echo "Operação realizada com sucesso";
+    }else{
+        echo "Houve um erro na operação: <br /> ";
+        echo mysqli_error($conexao);
+    }
+}
 
 if($botao == "Cadastrar"){
     if (mysqli_query($conexao, $sql)){
@@ -36,8 +49,6 @@ if($botao == "Cadastrar"){
         echo "Falha ao cadastrar!";
     }
 }
-
-
 
 ?>
 

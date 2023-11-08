@@ -32,24 +32,27 @@ if(empty($botao)) {
 }
 
 // aqui vou tratar erros das operações C.E.R.A
-
-if(!empty($sql)) {
-    if(mysqli_query($conexao, $sql)) {
+if(!empty($sql)){
+    if(mysqli_query($conexao, $sql)){
         echo "Operação realizada com sucesso";
     }else{
-        echo "Houve um erro na operação: <br /> ";
-        echo mysqli_error($conexao);
+        echo "Houve um erro na operação: <br />";
+        echo  mysqli_error($conexao);
     }
 }
+$selecionado = $_GET["id"];
 
-if($botao == "Cadastrar"){
-    if (mysqli_query($conexao, $sql)){
-        echo "Cadastrado com sucesso!";
-    }else{
-        echo "Falha ao cadastrar!";
+if(!empty($selecionado)){
+    $sql_selecionado = "SELECT * FROM funcionarios WHERE id = $selecionado";
+
+    $resultado = mysqli_query($conexao, $sql_selecionado);
+
+    while($linha = mysqli_fetch_assoc($resultado)){
+        $id = $linha["id"];
+        $nome = $linha["nome"];
+        $cpf = $linha["cpf"];
     }
 }
-
 ?>
 
 <html>
@@ -80,15 +83,35 @@ if($botao == "Cadastrar"){
     <body>
         <form name="func" method = "POST">
             <label for="id">ID:</label> 
-            <input type="text" name = "id">
+            <input type="text" name = "id" value = "<?php echo $id; ?>">
             <label for="nome">NOME:</label> 
-            <input type="text" name = "nome">
+            <input type="text" name = "nome" value = "<?php echo $nome; ?>">
             <label for="cpf">CPF:</label> 
-            <input type="text" name = "cpf">
+            <input type="text" name = "cpf" value = "<?php echo $cpf; ?>">
                 <div class="buttons">
                     <input type="submit" name = "botao" value="Cadastrar">
                     <input type="reset" name = "botao" value="Cancelar">
                 </div>
         </form>
+        <table>
+
+
+            <?php
+            $sql_mostra_cad = "SELECT * FROM funcionarios ORDER BY id desc limit 0,10";
+            $resultado = mysqli_query($conexao, $sql_mostra_cad);
+
+            while($linha = mysqli_fetch_assoc($resultado)){
+                echo "
+                <tr>
+                     <td>
+                     <a href='?id=".$linha["id"]."'>Selecionar</a>
+                     </td>
+                     <td>".$linha["id"]."</td>
+                     <td>".$linha["nome"]."</td>
+                     <td>".$linha["cpf"]."</td>
+                </tr>";
+            }
+            ?>
+        </table>
     </body>
 </html>

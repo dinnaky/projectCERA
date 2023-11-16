@@ -1,0 +1,73 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #333333;
+    color: #FFF;
+    margin: auto;
+    font-family: 'Roboto', sans-serif;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+input {
+    width: 400px;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-around;
+    width: 400px;
+}
+
+.buttons input {
+    width: 80px;
+}
+
+table{
+    width: 100%;
+    background-color: #EEE;
+    padding: 20px;
+    border-radius: 10px;
+    color: #000;
+}
+td, th {
+    padding: .7em;
+    margin: 0;
+    border: 1px solid #aaa;
+    text-align: center;
+}
+th{
+    font-weight: bold;
+    background-color: #EEE;
+}
+
+.busca .buscarinput{
+    width: 100%;
+}
+
+.busca .inputbutton {
+    width: 50%;
+}
+
+.busca {
+    display: flex;
+    gap: 50px;
+}
+
+.formulario {
+    width: 35%;
+}
